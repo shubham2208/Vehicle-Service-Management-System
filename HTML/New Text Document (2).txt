@@ -1,0 +1,72 @@
+
+document.addEventListener("deviceready",onDeviceReady,false);
+
+var database=null;
+
+function onDeviceReady()
+{
+	alert("1");
+database=window.openDatabase("Profile","1.0","profile details",200000);
+	alert("2");
+database.transaction(populateDatabase,errorDB, successDB);
+	alert("3");
+}
+function populateDatabase(tx)
+{
+	alert("POPULATEDATABASE called");
+	tx.executeSql("Create Table IF NOT EXISTS Profile (firstName text, lastName text, Address text, contactNumber text, vehicleNumber text, chasisNumber text, purchaseDate DATE)");
+	alert("4");
+}
+
+function insert() 
+{	alert("5");
+	//tx.executeSql("Create Table IF NOT EXISTS Profile (firstName text, lastName text, vehicleNumber text)");
+	//tx.executeSql("Insert into Profile values('Keyur','Patel','GJ23AK3797')");
+	var fName = document.getElementById("firstName").value;
+	var lName = document.getElementById("lastName").value;
+	var Address = document.getElementById("Address").value;
+	var coNumber = document.getElementById("contactNumber").value;
+	var vNumber = document.getElementById("vehicleNumber").value;
+	var chNumber = document.getElementById("chasisNumber").value;
+	//var purchaseDate = document.getElementById("purchaseDate").value;
+		alert("6");
+		//alert(purchaseDate);
+		alert("7");
+		database=window.openDatabase("Profile","1.0","profile details",200000);
+		alert("77");
+	
+		database.transaction(function(tx)
+		{insertProfile(tx, fName, lName, Address, coNumber, vNumber, chNumber, purchaseDate);},errorDBP,successDBP);
+alert("8");
+}
+
+function insertProfile(tx, fName, lName, Address, coNumber, vNumber, chNumber, purchaseDate)
+{
+	alert("9");
+	//var a="INSERT INTO Profile (firstName , lastName , Address , contactNumber ,vehicleNumber , chasisNumber , purchaseDate) values (?,?,?,?,?,?,?)",[fName, lName, Address, coNumber, vNumber, chNumber, purchaseDate]
+
+	alert(a);
+	alert("insert Profile called");
+	tx.executeSql("INSERT INTO Profile (firstName , lastName , Address , contactNumber ,vehicleNumber , chasisNumber , purchaseDate) values (?,?,?,?,?,?,?)",[fName, lName, Address, coNumber, vNumber, chNumber, purchaseDate]);
+	alert("DONE");
+}
+
+
+
+function errorDB(error)
+{
+	alert("error occured device ready:"+error);
+}
+function successDB()
+{
+	alert("success");
+}
+
+function errorDBP(error)
+{
+	alert("error occured profile:"+error);
+}
+function successDBP()
+{
+	alert("success profile");
+}

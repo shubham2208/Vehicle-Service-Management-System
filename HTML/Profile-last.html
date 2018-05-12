@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../css/mm_lodging.css" type="text/css" />
+<link rel="stylesheet" href="../css/divsize.css" type="text/css" />
+<head><script type="text/javascript" src="js/xui.js"></script>
+<script type="text/javascript" src="../js/cordova.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+
+document.addEventListener("deviceready",onDeviceReady,false);
+
+var database=null;
+
+function onDeviceReady()
+{
+	alert("1");
+database=window.openDatabase("Profile","1.0","profile details",200000);
+	alert("2");
+database.transaction(populateDatabase,errorDB, successDB);
+	alert("3");
+}
+function populateDatabase(tx)
+{
+	alert("POPULATEDATABASE called");
+	tx.executeSql("Create Table IF NOT EXISTS Profile (firstName text, lastName text, Address text, contactNumber text, vehicleNumber text, chasisNumber text)");
+	alert("4");
+}
+/* new
+function insert() 
+{	alert("5");
+	//tx.executeSql("Create Table IF NOT EXISTS Profile (firstName text, lastName text, vehicleNumber text)");
+	//tx.executeSql("Insert into Profile values('Keyur','Patel','GJ23AK3797')");
+	var fName = document.getElementById("firstName").value;
+	var lName = document.getElementById("lastName").value;
+	var Address = document.getElementById("Address").value;
+	var coNumber = document.getElementById("contactNumber").value;
+	var vNumber = document.getElementById("vehicleNumber").value;
+	var chNumber = document.getElementById("chasisNumber").value;
+	//var purchaseDate = document.getElementById("purchaseDate").value;
+		alert("6");
+		//alert(purchaseDate);
+		alert("7");
+		database=window.openDatabase("Profile","1.0","profile details",200000);
+		alert("77");
+	
+		database.transaction(function(tx)
+		{insertProfile(tx, fName, lName, Address, coNumber, vNumber, chNumber);},errorDBP,successDBP);
+alert("8");
+}
+
+function insertProfile(tx, fName, lName, Address, coNumber, vNumber, chNumber)
+{
+	alert("9");
+	//var a="INSERT INTO Profile (firstName , lastName , Address , contactNumber ,vehicleNumber , chasisNumber , purchaseDate) values (?,?,?,?,?,?,?)",[fName, lName, Address, coNumber, vNumber, chNumber, purchaseDate]
+
+	
+	alert("insert Profile called");
+	var a="INSERT INTO Profile (firstName , lastName , Address , contactNumber ,vehicleNumber , chasisNumber) values ('"+fName+"','"+lName+"','"+Address+"','"+coNumber+"','"+vNumber+"','"+chNumber+"') ";
+	alert(a);
+	tx.executeSql(a);
+	alert("DONE");
+}
+
+
+
+function errorDB(error)
+{
+	alert("error occured device ready:"+error);
+}
+function successDB()
+{
+	alert("success");
+}
+
+function errorDBP(error)
+{
+	alert("error occured profile:"+error);
+}
+function successDBP()
+{
+	alert("success profile");
+}    new*/
+
+/*
+function insert()
+{
+	database=window.openDatabase("Profile","1.0","profile details",200000);	
+	database.transaction(insertProfile,errorDB,successDB);
+}
+function insertProfile(tx)
+{
+	alert("Database ready to insert");
+	tx.executeSql("Create Table IF NOT EXISTS Profile (firstName text, lastName text, Address text, contactNumber text, ,vehicleNumber text, chasisNumber text, purchaseDate date)");
+	tx.executeSql("Insert into Profile values(firstName,lastName,Address,contactNumber,vehicleNumber,chasisNumber,purchaseDate)");	
+	alert("Database inserted");
+}
+
+function errorDB()
+{
+	alert("error occured:"+error);
+}
+function successDB()
+{
+	alert("Database succeed");
+}*/
+</script>
+<title>Profile</title>
+
+</head>
+<body>
+<div class="sizemain" align="center">VSMS</div>
+<div align="center" style="background-color:#999966" class="sizediv1" ><br>
+		
+	    <strong>Profile</strong></div>
+<div align="center" class="sizediv2">
+        <font style="arial" size="4pts" color="#333300">
+	   <form> <table width="100%">
+        <tr>
+        <td width="26%"  align="center"><a href="../index.html">HOME</a></td>
+        <td width="48%" align="center"><a href="../HTML/Developers.html">DEVELOPERS</a></td>
+        <td width="26%" align="center"><a href="../HTML/Dealer.html">DEALER</a></td>
+        </tr>
+        </table>
+        </font>
+</div>
+        <div align="center" class="sizediv3"><br>
+        <table width="100%" align="center">
+       
+        <tr align="left">
+        	<td width="20%"></td>
+        	<td width="12%">&nbsp;</td>
+        	<td width="11%">First Name</td>
+        	<td width="35%" align="center"><input type="text" id="firstName" autofocus="autofocus" autocomplete="on"/ placeholder="First name"></td>
+        	<td width="22%"></td>
+       	</tr>
+        <tr align="left">
+        	<td width="20%"></td>
+        	<td width="12%">&nbsp;</td>
+        	<td width="11%">Last Name</td>
+        	<td width="35%" align="center"><input type="text" id="lastName" autocomplete="on"/ placeholder="Last name"></td>
+        	<td width="22%"></td>
+       	</tr>
+        <tr align="left">
+        	<td width="20%"></td>
+        	<td>&nbsp;</td>
+        	<td>Address</td>
+        	<td align="center"><textarea cols="16" rows="5" id="Address" placeholder="Address"></textarea></td>
+        	<td width="22%"></td>
+       	</tr>
+        
+        <tr align="left">
+        	<td width="20%"></td>
+        	<td>&nbsp;</td>
+        	<td>Contact number</td>
+       	 <td align="center"><input type="text" id="contactNumber" placeholder="Contact number"/></td>
+       	 <td width="22%"></td>
+       	</tr>
+        <tr align="left">
+        	<td width="20%"></td>
+        	<td>&nbsp;</td>
+        	<td>Vehicle number</td>
+        	<td align="center"><input type="text" id="vehicleNumber" placeholder="Vehicle number"/></td>
+       	 <td width="22%"></td>
+       	</tr>
+        <tr align="left">
+        <td width="20%"></td>
+        <td>&nbsp;</td>
+        <td>Chasis number</td>
+        <td align="center"><input type="text" id="chasisNumber" placeholder="Chasis number"/></td>
+        <td width="22%"></td>
+       	</tr>
+        <tr align="left">
+        <td width="20%"></td>
+        <td>&nbsp;</td>
+        <td>Purchase date</td>
+        <td align="center"><input type="date" id="purchaseDate" placeholder="Purchase date"/></td>
+        <td width="22%"></td>
+       	</tr>
+        <tr align="left">
+        <td width="20%"></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td align="center">
+        	<input type="submit" id="submit_profile" onClick="return insert();"/>
+        	<input type="reset" align="center" onClick="this.form.reset();" id="reset_profile"/></td>
+        <td width="22%"></td>
+       	</tr>
+        </table></form></div>
+            <footer>
+        <div align="center" style="background-color:#999966">©Copyrights reserved<br/><br/>
+        </div>
+		</footer>
+</body>
+</html>

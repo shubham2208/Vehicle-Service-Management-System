@@ -1,0 +1,11 @@
+
+function insertProfile(tx, fName, lName, Address, coNumber, vNumber, chNumber, purchaseDate)
+{
+	alert("9");
+	var a="INSERT INTO Profile (firstName , lastName , Address , contactNumber ,vehicleNumber , chasisNumber , purchaseDate) values ('"+fName+"','"+lName+"','"+Address+"','"+coNumber+"','"+vNumber+"','"+chNumber+"', "+purchaseDate+") ";
+
+	alert(a);
+	alert("insert Profile called");
+	tx.executeSql(a);
+	alert("DONE");
+}

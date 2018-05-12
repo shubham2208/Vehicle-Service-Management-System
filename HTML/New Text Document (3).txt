@@ -1,0 +1,30 @@
+<script type="text/javascript">
+
+document.addEventListener("deviceready",onDeviceReady,false);
+
+var database=null; 
+
+function onDeviceReady()
+{
+	 database=window.openDatabase("Test","1.0","Testing Select",200000);
+	 database.transaction(PopulateDatabase,errorDB,successDB);
+}
+function PopulateDatabase(tx)
+{
+	tx.executeSql("Create Table IF NOT EXISTS Profile (firstName text, lastName text, vehicleNumber text)");
+	tx.executeSql("Insert into Profile values('Keyur','Patel','GJ23AK3797')");
+}
+function errorDB(error)
+{
+	alert("Erroe on Database creation :" + error);
+}
+function successDB()
+{
+	alert("Database created successfully");
+} 
+
+
+
+
+
+</script>
